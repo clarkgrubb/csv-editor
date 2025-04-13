@@ -1,13 +1,64 @@
 .table-container {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
+  margin: 20px;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.header-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+}
+
+.delete-column-btn, .delete-row-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+.delete-column-btn:hover, .delete-row-btn:hover {
+  color: #cc0000;
+}
+
+td div {
+  min-height: 20px;
+  cursor: pointer;
+}
+
+td input {
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 4px;
 }
 
 .controls {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
   gap: 10px;
 }
 
@@ -26,6 +77,11 @@
   border-color: #ccc;
 }
 
+.delete-row-cell {
+  width: 30px;
+  text-align: center;
+}
+
 .download-btn {
   background-color: #2196F3 !important;
 }
@@ -40,84 +96,4 @@
 
 .upload-btn:hover {
   background-color: #F57C00 !important;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f8f9fa;
-  font-weight: bold;
-}
-
-td {
-  background-color: white;
-}
-
-.header-cell {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.header-input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.delete-column-btn,
-.delete-row-btn {
-  background-color: white;
-  color: #666;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 0;
-  transition: all 0.2s;
-}
-
-.delete-column-btn:hover,
-.delete-row-btn:hover {
-  background-color: #f5f5f5;
-  color: #333;
-  border-color: #999;
-}
-
-.delete-row-cell {
-  width: 40px;
-  text-align: center;
-}
-
-td input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-td div {
-  min-height: 20px;
-  cursor: pointer;
-}
-
-td div:hover {
-  background-color: #f5f5f5;
 } 
