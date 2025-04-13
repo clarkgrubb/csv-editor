@@ -6,12 +6,15 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
 }
 
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  position: relative;
+  overflow: hidden;
 }
 
 th {
@@ -22,10 +25,13 @@ th {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .header-input {
   flex: 1;
+  min-width: 0;
+  width: 0;
   border: none;
   background: transparent;
   font-weight: bold;
@@ -48,6 +54,9 @@ th {
 td div {
   min-height: 20px;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 td input {
@@ -80,6 +89,21 @@ td input {
 .delete-row-cell {
   width: 30px;
   text-align: center;
+}
+
+.resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #ddd;
+  cursor: col-resize;
+  z-index: 1;
+}
+
+.resize-handle:hover {
+  background-color: #999;
 }
 
 .download-btn {

@@ -5,7 +5,11 @@ const EditableTable = () => {
   const [headers, setHeaders] = useState(['Column 1']);
   const [rows, setRows] = useState([['']]);
   const [editingCell, setEditingCell] = useState(null);
+  const [columnWidths, setColumnWidths] = useState({});
   const fileInputRef = useRef(null);
+  const resizingColumn = useRef(null);
+  const startX = useRef(0);
+  const startWidth = useRef(0);
 
   const addHeader = () => {
     setHeaders([...headers, `Column ${headers.length + 1}`]);
@@ -50,7 +54,38 @@ const EditableTable = () => {
     setEditingCell(null);
   };
 
+  const startResizing = (index, e) => {
+    resizingColumn.current = index;
+    startX.current = e.clientX;
+    const th = e.target.parentElement;
+    startWidth.current = th.offsetWidth;
+    document.addEventListener('mousemove', handleResizing);
+    document.addEventListener('mouseup', stopResizing);
+  };
+
+  const handleResizing = (e) => {
+    if (resizingColumn.current === null) return;
+    
+    const width = startWidth.current + (e.clientX - startX.current);
+    if (width < 50) return; // Minimum width of 50px
+    
+    setColumnWidths(prev => ({
+      ...prev,
+      [resizingColumn.current]: width
+    }));
+  };
+
+  const stopResizing = () => {
+    resizingColumn.current = null;
+    document.removeEventListener('mousemove', handleResizing);
+    document.removeEventListener('mouseup', stopResizing);
+  };
+
   const downloadCSV = () => {
+    // Get the h1 tag's content for the filename
+    const h1Element = document.querySelector('h1');
+    const fileName = h1Element ? h1Element.textContent : 'table_data';
+
     // Escape special characters in headers and cells
     const escapeCSV = (str) => {
       if (str.includes(',') || str.includes('"') || str.includes('\n')) {
@@ -71,7 +106,7 @@ const EditableTable = () => {
     const url = URL.createObjectURL(blob);
     
     link.setAttribute('href', url);
-    link.setAttribute('download', 'table_data.csv');
+    link.setAttribute('download', `${fileName}.csv`);
     link.style.visibility = 'hidden';
     
     document.body.appendChild(link);
@@ -143,7 +178,10 @@ const EditableTable = () => {
         <thead>
           <tr>
             {headers.map((header, index) => (
-              <th key={index}>
+              <th 
+                key={index}
+                style={{ width: columnWidths[index] ? `${columnWidths[index]}px` : 'auto' }}
+              >
                 <div className="header-cell">
                   <input
                     type="text"
@@ -159,6 +197,10 @@ const EditableTable = () => {
                     ×
                   </button>
                 </div>
+                <div 
+                  className="resize-handle"
+                  onMouseDown={(e) => startResizing(index, e)}
+                />
               </th>
             ))}
           </tr>
