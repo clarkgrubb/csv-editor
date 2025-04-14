@@ -1,0 +1,10 @@
+* fix column resizing (if you don't resize leftmost column first, it doesn't work)
+* what happens if table too big ofr
+* sortable columns
+* cell notation for rows
+* footer functions: count, sum, avg
+* enumerable column
+* column type: enumerable
+* column type: regex
+* column type: enum/dropdown
+* tabs
