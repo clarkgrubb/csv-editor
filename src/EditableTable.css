@@ -59,6 +59,11 @@ td div {
   white-space: nowrap;
 }
 
+td.delete-row-cell {
+  border-style: none;
+  text-align: left;
+}
+
 td input {
   width: 100%;
   border: 1px solid #ddd;
@@ -120,4 +125,4 @@ td input {
 
 .upload-btn:hover {
   background-color: #F57C00 !important;
-} 
+}
